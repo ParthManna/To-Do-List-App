@@ -124,8 +124,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Set Date"
                 android:textSize="18sp"
-                android:drawablePadding="8dp"
-                android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+                android:drawableEnd="@drawable/ic_menu_my_calendar_with_padding"
+                android:drawableTint="@color/colorAccent"
                 android:cursorVisible="false"
                 android:inputType="date"
                 android:focusable="false" />
@@ -152,12 +152,9 @@
             android:clickable="true"
             android:id="@+id/timeEdt"
             android:cursorVisible="false"
-            android:drawablePadding="8dp"
-            android:drawableEnd="@drawable/baseline_access_time_24"
+            android:drawableEnd="@drawable/baseline_access_time_24_with_padding"
             android:drawableTint="@color/colorAccent"
             android:focusable="false"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
             android:textSize="18sp"/>
 
 

@@ -2,6 +2,8 @@ package com.example.todo_p
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.View
+import android.widget.DatePicker
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -9,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.room.Room
 import java.util.Calendar
 import com.example.todo_p.databinding.ActivityTaskBinding
+import java.text.SimpleDateFormat
 
 const val DB_NAME = "todo.db"
 class TaskActivity : AppCompatActivity() {
@@ -17,7 +20,7 @@ class TaskActivity : AppCompatActivity() {
 
     lateinit var myCalender: Calendar
 
-    lateinit var datasetListener:DatePickerDialog.OnDateSetListener
+    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
     val db by lazy{
         Room.databaseBuilder(this,
@@ -37,5 +40,41 @@ class TaskActivity : AppCompatActivity() {
             insets
         }
 
+        binding.dateEdt.setOnClickListener{ v : View ->
+            when(v.id){
+                R.id.dateEdt -> {
+                    setListener()
+                }
+            }
+        }
+
     }
+
+    private fun setListener() {
+        myCalender = Calendar.getInstance()
+
+        dateSetListener = DatePickerDialog.OnDateSetListener{ _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+            myCalender.set(Calendar.YEAR,year)
+            myCalender.set(Calendar.MONTH,month)
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            updateDate()
+        }
+
+        val datePickerDialog = DatePickerDialog(
+            this, dateSetListener, myCalender.get(Calendar.YEAR),
+            myCalender.get(Calendar.MONTH),myCalender.get(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+        datePickerDialog.show()
+    }
+
+    private fun updateDate() {
+        val myformat = "EEE, d MMM yyyy"
+        val sdf = SimpleDateFormat(myformat)
+        binding.dateEdt.setText(sdf.format(myCalender.time))
+
+        binding.timeInptLay.visibility = View.VISIBLE
+    }
+
 }

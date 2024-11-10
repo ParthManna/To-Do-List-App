@@ -1,0 +1,11 @@
+<!-- res/values-night/styles.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme for Night mode -->
+    <style name="Base.Theme.Todo_P" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your primary color for night theme -->
+        <item name="colorPrimary">@color/colorAccent</item>
+    </style>
+
+    <!-- App theme inheriting from Base theme -->
+    <style name="Theme.Todo_P" parent="Base.Theme.Todo_P" />
+</resources>

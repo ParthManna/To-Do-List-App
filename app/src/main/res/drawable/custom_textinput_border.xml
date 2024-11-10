@@ -1,0 +1,11 @@
+<!-- res/drawable/custom_textinput_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <!-- Border color and thickness -->
+    <stroke android:width="2dp" android:color="#7883CC" /> <!-- Replace with your desired color -->
+
+    <!-- Optional: Set corner radius for rounded corners -->
+    <corners android:radius="8dp" />
+
+    <!-- Optional: Background color of the input field -->
+    <solid android:color="@android:color/white" />
+</shape>

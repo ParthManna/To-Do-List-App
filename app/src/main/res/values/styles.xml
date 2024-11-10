@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Label Style -->
+    <style name="LabelStyle">
+        <item name="android:textColor">@android:color/holo_orange_light</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Main App Theme based on Material Components -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- AppBar Overlay for Toolbar -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <!-- Popup Overlay Style -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+
+
+</resources>

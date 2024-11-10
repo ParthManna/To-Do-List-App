@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         setSupportActionBar(binding.toolbar)
-        findViewById<FloatingActionButton>(R.id.fab)?.setOnClickListener {
+        binding.fab.setOnClickListener {
             startActivity(Intent(this, TaskActivity::class.java))
         }
     }

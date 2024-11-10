@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginStart="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
+    android:padding="16dp"
     android:id="@+id/main"
     tools:context=".TaskActivity">
 
@@ -32,11 +29,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
         android:text="Task Title"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/holo_blue_bright"
         android:textSize="16sp"/>
 
     <!-- Task Title Input -->
@@ -44,21 +42,27 @@
         android:id="@+id/titleInplay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:errorEnabled="true"
+        android:hint="Enter Task Title"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
-
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
-        android:background="@drawable/custom_textinput_border"
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/taskTitleInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Task Title"
-            android:inputType="text" />
+            android:padding="12dp"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:backgroundTint="?android:attr/colorControlHighlight" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Task Description Label -->
@@ -68,96 +72,118 @@
         android:text="What is to be done?"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="@android:color/white"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@android:color/holo_blue_bright"
         android:textSize="16sp"/>
 
     <!-- Task Description Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:errorEnabled="true"
+        android:hint="Enter Task Description"
         android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/taskDescriptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Your Task"
+            android:padding="12dp"
             android:inputType="textMultiLine"
             android:lines="3"
             android:gravity="start"
-            android:textSize="18sp" />
-
+            android:textSize="16sp"
+            android:backgroundTint="?android:attr/colorControlHighlight" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Date Label -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
         style="@style/LabelStyle"
         android:text="Set reminder date and time"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        />
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="16sp" />
 
     <!-- Date Picker with Calendar Icon -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:errorEnabled="true"
+        android:hint="Set Date"
         android:layout_marginStart="10dp"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
-        android:background="@drawable/custom_textinput_border"
-        android:layout_marginEnd="10dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dateEdt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Set Date"
-                android:textSize="18sp"
-                android:drawableEnd="@drawable/ic_menu_my_calendar_with_padding"
-                android:drawableTint="@color/colorAccent"
-                android:cursorVisible="false"
-                android:inputType="date"
-                android:focusable="false" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        app:hintTextColor="@color/colorAccent"
-        app:boxStrokeColor="@color/colorAccent"
-        android:background="@drawable/custom_textinput_border"
-        android:visibility="gone"
-        android:id="@+id/timeInptLay">
+        android:layout_marginEnd="10dp"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/dateEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Set Time"
-            android:clickable="true"
-            android:id="@+id/timeEdt"
+            android:padding="12dp"
+            android:textSize="16sp"
+            android:drawableEnd="@drawable/ic_menu_my_calendar_with_padding"
+            android:drawableTint="@color/colorAccent"
             android:cursorVisible="false"
+            android:inputType="none"
+            android:focusable="false"
+            android:backgroundTint="?android:attr/colorControlHighlight"
+            android:contentDescription="Select date for reminder" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Time Picker with Clock Icon -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/timeInptLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:errorEnabled="true"
+        android:hint="Set Time"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/timeEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
             android:drawableEnd="@drawable/baseline_access_time_24_with_padding"
             android:drawableTint="@color/colorAccent"
+            android:cursorVisible="false"
+            android:inputType="none"
             android:focusable="false"
-            android:textSize="18sp"/>
-
-
+            android:textSize="16sp"
+            android:backgroundTint="?android:attr/colorControlHighlight"
+            android:contentDescription="Select time for reminder" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Priority Dropdown (Spinner) -->
@@ -165,10 +191,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp">
 
         <Spinner
             android:id="@+id/spinnerCategory"
@@ -177,17 +204,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:spinnerMode="dropdown"
-            />
+            android:contentDescription="Task category selection" />
 
         <ImageView
             android:id="@+id/imgAddCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_playlist_add_24"
-            app:tint="@color/colorAccent" />
-
+            app:tint="@color/colorAccent"
+            android:contentDescription="Add new task category" />
     </LinearLayout>
-
 
     <!-- Save Task Button -->
     <com.google.android.material.button.MaterialButton
@@ -195,12 +221,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:backgroundTint="@color/colorAccent"
-        android:text="SAVE TASK"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="SAVE TASK"
         android:textColor="@android:color/white"
-        android:background="@drawable/custom_textinput_border"
+        android:backgroundTint="@color/colorAccent"
         android:contentDescription="Save Task Button" />
 
 </LinearLayout>

@@ -5,16 +5,26 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.example.todo_p.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
+
+    val list = arrayListOf<TodoModel>()
+    var adapter = TodoAdapter(list)
+
+    val db by lazy{
+        AppDatabase.getDatabase(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +37,19 @@ class MainActivity : AppCompatActivity() {
             insets
         }
         setSupportActionBar(binding.toolbar)
+        binding.todoRv.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = this@MainActivity.adapter
+        }
+
+        db.todoDao().getTask().observe(this, Observer {
+            if(!it.isNullOrEmpty()){
+                list.clear()
+                list.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
+        })
+
         binding.fab.setOnClickListener {
             startActivity(Intent(this, TaskActivity::class.java))
         }
@@ -46,4 +69,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }

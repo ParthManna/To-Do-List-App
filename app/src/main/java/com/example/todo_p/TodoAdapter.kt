@@ -33,7 +33,7 @@ class TodoAdapter (val list : List<TodoModel>) :
                 findViewById<View>(R.id.viewColorTag).setBackgroundColor(randomColor)
                 findViewById<TextView>(R.id.txtShowTitle).text = todoModel.title
                 findViewById<TextView>(R.id.txtShowTask).text = todoModel.description
-                findViewById<TextView>(R.id.txtShowCategory).text = todoModel.Category
+                findViewById<TextView>(R.id.txtShowCategory).text = todoModel.category
                 updateTime(todoModel.time)
                 updateDate(todoModel.date)
             }

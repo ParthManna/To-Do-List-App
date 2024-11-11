@@ -19,6 +19,11 @@ class TodoAdapter (val list : List<TodoModel>) :
             .inflate(R.layout.item_todo, parent, false))
     }
 
+    override fun getItemId(position: Int): Long {
+        return list[position].id // Assuming each TodoModel has a unique `id` field.
+    }
+
+
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {

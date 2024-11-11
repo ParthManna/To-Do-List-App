@@ -15,8 +15,8 @@ interface TodoDao {
     fun getTask(): LiveData<List<TodoModel>>
 
     @Query("Update TodoModel set isFinished = 1 where id=:uid")
-    fun finishTask(uid: Long)
+    suspend fun finishTask(uid: Long)
 
     @Query("Delete from TodoModel where id=:uid")
-    fun deleteTask(uid: Long)
+    suspend fun deleteTask(uid: Long)
 }

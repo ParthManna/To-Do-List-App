@@ -1,7 +1,10 @@
 package com.example.todo_p
 
+import android.app.AlarmManager
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 import com.example.todo_p.databinding.ActivityTaskBinding
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -68,7 +70,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v : View){
         when(v.id){
             R.id.dateEdt -> {
-                setListener()
+                setDateListener()
             }
             R.id.timeEdt -> {
                 setTimeListener()
@@ -83,15 +85,11 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
         val title = binding.taskTitleInput.text.toString().trim()
         val description = binding.taskDescriptionInput.text.toString().trim()
         val category = binding.spinnerCategory.selectedItem.toString()
-
-        // Retrieve date and time as epoch milliseconds
-        val dateInMillis = myCalendar.timeInMillis
-        val timeInMillis = myCalendar.get(Calendar.HOUR_OF_DAY) * 3600000L +
-                myCalendar.get(Calendar.MINUTE) * 60000L
+        val alarmTime = myCalendar.timeInMillis // Full date and time in milliseconds
 
         // Validate inputs
-        if (title.isEmpty() || dateInMillis == 0L || timeInMillis == 0L) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+        if (title.isEmpty() || alarmTime <= System.currentTimeMillis()) {
+            Toast.makeText(this, "Please enter a valid title and future date/time.", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -100,18 +98,56 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
             title = title,
             description = description,
             category = category,
-            date = dateInMillis,
-            time = timeInMillis
-
+            date = alarmTime,
+            time = alarmTime
         )
 
-        // Insert task asynchronously
+        // Insert task asynchronously and set an alarm
         lifecycleScope.launch {
-            db.todoDao().insetTask(todoModel)
+            val newTaskId = db.todoDao().insetTask(todoModel)
             Toast.makeText(this@TaskActivity, "Task saved successfully", Toast.LENGTH_SHORT).show()
+
+            // Schedule alarm for the task
+            scheduleAlarm(newTaskId, alarmTime)
             finish()
         }
     }
+
+    public lateinit var pendingIntent: PendingIntent
+
+    private fun scheduleAlarm(taskId: Long, alarmTime: Long) {
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+
+        // Create an intent for the broadcast receiver
+        val intent = Intent(this, AlarmManagerBroadcast::class.java).apply {
+            putExtra("taskId", taskId)  // Pass task ID
+        }
+
+        // Unique request code derived from taskId
+        val requestCode = taskId.toInt()
+
+        // Create the PendingIntent with unique request code
+        pendingIntent = PendingIntent.getBroadcast(
+            this,
+            requestCode,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            alarmTime,
+            pendingIntent
+        )
+
+
+    }
+
+    public fun getpendingIntent() = pendingIntent
+
+
+
 
     private fun setTimeListener() {
         timeSetListener = TimePickerDialog.OnTimeSetListener{ _: TimePicker, hourofday: Int, minute: Int ->
@@ -136,7 +172,7 @@ class TaskActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun setListener() {
+    private fun setDateListener() {
 
         dateSetListener = DatePickerDialog.OnDateSetListener{ _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
             myCalendar.set(Calendar.YEAR,year)

@@ -1,5 +1,6 @@
 package com.example.todo_p
 
+import android.app.AlarmManager
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -69,6 +70,9 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             startActivity(Intent(this, TaskActivity::class.java))
         }
+
+
+
     }
 
     fun initSwipe(){
@@ -98,9 +102,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
 
             override fun onChildDraw(
                 canvas: Canvas,
